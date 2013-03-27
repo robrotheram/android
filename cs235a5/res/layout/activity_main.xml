@@ -1,14 +1,28 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="horizontal" >
+    
+	<FrameLayout
+        android:id="@+id/fragMenuFrame" 
+        android:layout_width="200dp" 
+        android:layout_height="match_parent" >
+    	
+    	<fragment
+        	android:id="@+id/listFragment"
+        	android:layout_width="fill_parent"
+        	android:layout_weight="1"
+        	android:layout_height="match_parent"
+        	class="com.robrotheram.cs235a5.MyListFragment" ></fragment>
+    </FrameLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+    <fragment
+        android:id="@+id/VisulisationFragment"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="match_parent"
+        class="com.robrotheram.cs235a5.DetailFragment">   
+    </fragment>
 
-</RelativeLayout>
+</LinearLayout> 
