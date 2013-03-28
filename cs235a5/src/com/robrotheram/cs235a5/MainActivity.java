@@ -3,15 +3,21 @@ package com.robrotheram.cs235a5;
 
 
 import java.io.File;
+
+
+
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 
 import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -19,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -31,7 +38,9 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
 	private View cached;
 	private VisulisationList lD;
 	private DataSet db;
-	
+	private View settings;
+	private View main; 
+	private boolean newdb;
 	private int[][] scheem = {
 			{   Color.rgb(2,89,89),
 				Color.rgb(0,175,181),
@@ -69,6 +78,7 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		newdb = false;
 		setContentView(R.layout.activity_main);
 		m_cnt= this;
 		db = new DataSet();
@@ -89,8 +99,11 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
             	removeChart();
             }
         });
-		
 	}
+		
+	
+        	
+        	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -98,10 +111,25 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
 		getMenuInflater().inflate(R.menu.activity_main, menu);
 		return true;
 	}
-
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) { 
+	    // Handle item selection       
+	    switch (item.getItemId()) {   
+	    case R.id.menu_settings:           
+	        Log.d("settings","munupressed");
+	        
+	        Intent intent = new Intent(this, Setting.class);
+	        newdb = true;
+	        startActivity(intent);
+	        
+	        return true;           
+         
+	    default:              
+	        return super.onOptionsItemSelected(item);    
+	    }
+	}
 	
 	public void init(){
-		
 
 		 //import file
 		 String imagePath = Environment.getExternalStorageDirectory().toString() + "/csv.csv";
@@ -136,7 +164,6 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
          lD = new VisulisationList(this, db);
          
          ScrollView sv = new ScrollView(this);
-         
          sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
          sv.addView(new TableView(this, db).getView());
          lD.addView(sv);
@@ -261,6 +288,27 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
 		}
 		
 	}
+	
+	protected void onResume() {
+		super.onResume();
+		if(newdb){
+			Log.d("rebuild","rebild");
+		lD.removeView(0);
+		 ScrollView sv = new ScrollView(this);
+         sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
+         sv.addView(new TableView(this, db).getView());
+         lD.addView(sv,0);
+         
+ 		cpa = new  ChartPageadapter(this, lD.GetViews());
+ 		Log.d("Test",myPager.toString());
+ 		myPager.setAdapter(cpa);  	
+ 		myPager.setCurrentItem(cpa.getCount(), true);
+ 		newdb = false;
+		}
+    }
+	
+	    
+	
 	
 	
 	

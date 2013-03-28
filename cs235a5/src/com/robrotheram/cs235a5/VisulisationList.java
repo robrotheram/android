@@ -25,6 +25,10 @@ public class VisulisationList {
 		m_pages.add(v);
 		return true;
 	}
+	public boolean addView(View v, int i){
+		m_pages.add(i,v);
+		return true;
+	}
 	public boolean removeView(int id){
 		m_pages.remove(id);
 		return true;
