@@ -1,27 +1,27 @@
 package com.robrotheram.cs235a5;
 
 import java.util.ArrayList;
-import java.util.Random;
+
 
 import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
+
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.graphics.Color;
-import android.util.Log;
+
 import android.view.View;
-import android.widget.LinearLayout;
+
 
 
 public class MakePieChart {
 	
-	 private GraphicalView m_ChartView;
+
 	 private DataSet m_db;
-	 private final int COUNT=5;
+
 	 private int[] m_colors = new int[] { Color.RED, Color.DKGRAY, Color.BLUE, Color.parseColor("#800080"),Color.parseColor("#008000"),Color.GRAY };
 	 private Context m_cnt;
 	 private ArrayList<String> foundElements;

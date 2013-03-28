@@ -1,38 +1,34 @@
 package com.robrotheram.cs235a5;
 
 import java.util.ArrayList;
-import java.util.Random;
+
 
 import org.achartengine.ChartFactory;
-import org.achartengine.GraphicalView;
 import org.achartengine.chart.BarChart.Type;
 import org.achartengine.chart.PointStyle;
-import org.achartengine.model.CategorySeries;
+
 import org.achartengine.model.XYMultipleSeriesDataset;
 import org.achartengine.model.XYSeries;
-import org.achartengine.renderer.DefaultRenderer;
-import org.achartengine.renderer.SimpleSeriesRenderer;
+
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
 import android.content.Context;
-import android.content.Intent;
+
 import android.graphics.Color;
-import android.util.Log;
+
 import android.view.View;
-import android.widget.LinearLayout;
+
 
 
 public class MakeBarChart {
 	
-	 private GraphicalView m_ChartView;
+	
 	 private DataSet m_db;
-	 private final int COUNT=5;
+
 	 private int[] m_colors = new int[] { Color.RED, Color.DKGRAY, Color.BLUE, Color.parseColor("#800080"),Color.parseColor("#008000"),Color.GRAY };
 	 private Context m_cnt;
 	 private ArrayList<String> foundElements;
-	 private int size;
-	 
 	 public MakeBarChart(Context context, DataSet db){
 		 m_cnt = context;
 		 m_db = db;
@@ -42,7 +38,6 @@ public class MakeBarChart {
 	 public View GetChartView(String title, int xPosition, int yPosition ) {
 	  
 		 XYSeries cs = new XYSeries(title);
-		  
 	      int sum = 0;
 	      int pos = 0;
 	      int j= 0;
@@ -78,7 +73,6 @@ public class MakeBarChart {
 	              preVal = m_db.GetCell(xPosition, i++);
 	              sum=0;//
 	              pos++;	
-	              size++;
 	              }
 	          }
 	        

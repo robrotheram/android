@@ -1,20 +1,16 @@
 package com.robrotheram.cs235a5;
 
 import java.util.Vector;
-
-import android.content.Context;
 import android.view.View;
 
 public class VisulisationList {
 	private Vector<View> m_pages;
-	private DataSet m_db;
-	private Context m_cnt;
+
 	
 	
-	public  VisulisationList(Context context,DataSet db){
+	public  VisulisationList(){
 		m_pages = new Vector<View>();
-		m_db = db;
-		m_cnt = context;
+
 	}
 	
 	

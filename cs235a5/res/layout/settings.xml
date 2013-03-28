@@ -19,10 +19,11 @@
             android:id="@+id/editText1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:singleLine="true"
-            android:lines="1"
             android:layout_weight="0.98"
-            android:ems="10" android:inputType="text">
+            android:ems="10"
+            android:inputType="text"
+            android:lines="1"
+            android:singleLine="true" >
 
             <requestFocus />
         </EditText>
@@ -32,7 +33,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@+string/Download" />
-
     </LinearLayout>
 
     <LinearLayout
@@ -51,7 +51,6 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
     </LinearLayout>
 
     <ScrollView
@@ -60,9 +59,9 @@
         android:layout_height="match_parent" >
 
         <LinearLayout
+            android:id="@+id/tableView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tableView"
             android:orientation="vertical" >
         </LinearLayout>
     </ScrollView>

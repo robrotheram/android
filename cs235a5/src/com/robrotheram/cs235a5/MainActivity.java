@@ -3,19 +3,14 @@ package com.robrotheram.cs235a5;
 
 
 import java.io.File;
-
-
+import java.util.Locale;
 
 import android.os.Bundle;
 import android.os.Environment;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-
-import android.graphics.Color;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,62 +20,25 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 public class MainActivity extends Activity implements MyListFragment.OnItemSelectedListener{ 
 	
-	private Context m_cnt;
+
 	private ViewPager myPager; 
 	private ChartPageadapter cpa;
-	private View cached;
-	private VisulisationList lD;
 	private DataSet db;
-	private View settings;
-	private View main; 
-	private boolean newdb;
-	private int[][] scheem = {
-			{   Color.rgb(2,89,89),
-				Color.rgb(0,175,181),
-				Color.rgb(189,51,103),
-				Color.rgb(242,206,22),
-				Color.rgb(204,135,4)
-			},
-			{   Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89)
-			},
-			{   Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89)
-			},
-			{   Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89)
-			},
-			{   Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89),
-				Color.rgb(8,89,89)
-			},
-			
+	private VisulisationList  lD = new VisulisationList();
 
-	};
+	private boolean newdb;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		newdb = false;
 		setContentView(R.layout.activity_main);
-		m_cnt= this;
 		db = new DataSet();
 		Log.d("Dataset ouptput",("Setting up data"));
 		init();
@@ -148,7 +106,6 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
          	}
          }
          Spinner spinner = new Spinner(this);
-         String[] spinnerArray;
 		ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(
                  this, android.R.layout.simple_spinner_item,db.GetHeader());
          spinnerArrayAdapter.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item );
@@ -158,41 +115,11 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
          
          spinner = (Spinner) findViewById( R.id.spinner2);
          spinner.setAdapter(spinnerArrayAdapter);
-         
-      
-         
-         lD = new VisulisationList(this, db);
-         
+    
          ScrollView sv = new ScrollView(this);
          sv.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
          sv.addView(new TableView(this, db).getView());
          lD.addView(sv);
-         /*
-         LinearLayout ll =  new LinearLayout(this);
-         Log.d("Test",ll.toString());
-         ll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-         ll.addView(new MakeScatterChart(this, db).GetChartView());
-         lD.UpdateViews(ll);
-         
-         LinearLayout ll1 =  new LinearLayout(this);
-         Log.d("Test",ll1.toString());
-         ll1.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-         ll1.addView(new MakePieChart(this, db).GetChartView());
-         lD.UpdateViews(ll1);
-         
-         LinearLayout ll2 =  new LinearLayout(this);
-         Log.d("Test",ll2.toString());
-         ll2.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-         ll2.addView(new MakeLineChart(this, db).GetChartView());
-         lD.UpdateViews(ll2);
-         
-         LinearLayout ll3 =  new LinearLayout(this);
-         Log.d("Test",ll3.toString());
-         ll3.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,LayoutParams.WRAP_CONTENT));
-         ll3.addView(new MakeBarChart(this, db).GetChartView());
-         lD.UpdateViews(ll3);
-         
-         */
          myPager = (ViewPager) this.findViewById(R.id.myfivepanelpager); 
          cpa = new  ChartPageadapter(this, lD.GetViews());
          Log.d("Test",myPager.toString());
@@ -222,7 +149,7 @@ public class MainActivity extends Activity implements MyListFragment.OnItemSelec
 		LinearLayout ll1 =  new LinearLayout(this);
 		
 	
-		ChartType chart = ChartType.valueOf(whichChart.getSelectedItem().toString().toUpperCase());
+		ChartType chart = ChartType.valueOf(whichChart.getSelectedItem().toString().toUpperCase(Locale.getDefault()));
 		switch(chart){
 			case BARCHART: 
 				

@@ -1,5 +1,6 @@
 package com.robrotheram.cs235a5;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ public class TableView {
 		// TODO Auto-generated constructor stub
 	}
 	
+	@SuppressLint("DrawAllocation")
 	public View getView(){
 
 		TableLayout table = new TableLayout(m_cnt);
@@ -33,10 +35,6 @@ public class TableView {
 		for (int i = -1; i < (m_db.GetNumOfRows()-1); i++) {
 			if(i == -1){
 				TableRow row = new TableRow(m_cnt);
-				FrameLayout.LayoutParams rlp = new FrameLayout.LayoutParams(
-				        ViewGroup.LayoutParams.WRAP_CONTENT,
-				        ViewGroup.LayoutParams.MATCH_PARENT);
-				row.setLayoutParams(lp);
 				for (int j = 0; j < (m_db.GetHeader().length); j++) {
 					
 				TextView cell = new TextView(m_cnt) {
@@ -63,10 +61,6 @@ public class TableView {
 				table.setStretchAllColumns(true);
 			}else{
 				TableRow row = new TableRow(m_cnt);
-				FrameLayout.LayoutParams rlp = new FrameLayout.LayoutParams(
-				        ViewGroup.LayoutParams.WRAP_CONTENT,
-				        ViewGroup.LayoutParams.MATCH_PARENT);
-				row.setLayoutParams(lp);
 				for (int j = 0; j < (m_db.GetNumOfColumns()); j++) {
 					
 				TextView cell = new TextView(m_cnt) {

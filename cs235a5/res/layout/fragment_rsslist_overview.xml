@@ -7,18 +7,17 @@
     <Spinner
         android:id="@+id/spinner3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:entries="@array/array_name"
-        />
+        android:layout_height="wrap_content"
+        android:entries="@array/array_name" />
 
     <EditText
         android:id="@+id/editText1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="search..."
-        android:singleLine="true"
+        android:hint="@string/hint"
         android:lines="1"
+        android:singleLine="true"
         android:text="@string/test" >
 
         <requestFocus />
@@ -28,27 +27,24 @@
         android:id="@+id/spinner1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/array_name"
-        />
+        android:entries="@array/array_name" />
 
     <Spinner
         android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/array_name"
-         />
+        android:entries="@array/array_name" />
 
     <Button
         android:id="@+id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Chart"
-         />
-     <Button
+        android:text="Add Chart" />
+
+    <Button
         android:id="@+id/buttonRemove"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Chart"
-         />
+        android:text="Delete Chart" />
 
-</LinearLayout> 
+</LinearLayout>
