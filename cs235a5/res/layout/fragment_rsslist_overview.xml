@@ -39,12 +39,12 @@
         android:id="@+id/button1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Add Chart" />
+        android:text="@+string/addChart" />
 
     <Button
         android:id="@+id/buttonRemove"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Delete Chart" />
+        android:text="@+string/DeleteChart" />
 
 </LinearLayout>

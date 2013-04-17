@@ -1,4 +1,4 @@
-package com.robrotheram.cs235a5;
+package com.robrotheram.charts;
 
 import java.util.ArrayList;
 
@@ -13,6 +13,10 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import com.robrotheram.cs235a5.DataCell;
+import com.robrotheram.cs235a5.DataSet;
+import com.robrotheram.cs235a5.DataType;
+
 import android.content.Context;
 
 import android.graphics.Color;
@@ -26,7 +30,14 @@ public class MakeScatterChart {
 
 	 private DataSet m_db;
 
-	 private int[] m_colors = new int[] { Color.RED, Color.DKGRAY, Color.BLUE, Color.parseColor("#800080"),Color.parseColor("#008000"),Color.GRAY };
+	 private int[] m_colors = new int[] {
+			 Color.RED, 
+			 Color.DKGRAY, 
+			 Color.BLUE, 
+			 Color.parseColor("#800080"),
+			 Color.parseColor("#008000"),
+			 Color.GRAY };
+	 
 	 private Context m_cnt;
 	 private ArrayList<String> foundElements;
 
@@ -54,26 +65,30 @@ public class MakeScatterChart {
           
           if(!isUnique(m_db.GetCell(xPosition, i).toString())){
               for(j = pos; j < m_db.GetNumOfRows()-1; j++ ){
-                  if(preVal.toString().equals(m_db.GetCell(xPosition, j).toString())){
+                  if(preVal.toString().equals(m_db.GetCell(xPosition, j)
+                		  .toString())){
                       
                       
-                      System.out.println("DatatType= :"+m_db.GetCell(xPosition, j).GetDataType());
+                      System.out.println("DatatType= :"+m_db
+                    		  .GetCell(xPosition, j).GetDataType());
                       //Check if datatype is a number
-                      if(m_db.GetCell(xPosition, j).GetDataType()==DataType.INTEGER){
+                      if(m_db.GetCell(xPosition, j).GetDataType()==
+                    		  DataType.INTEGER)
+                      {
                           sum += m_db.GetCell(yPosition, j).GetInteger();  
-                      }else if(m_db.GetCell(xPosition, j).GetDataType()==DataType.DOUBLE){
+                      }else if(m_db.GetCell(xPosition, j).GetDataType()==
+                    		  DataType.DOUBLE)
+                      	{
                           sum += m_db.GetCell(yPosition, j).GetDouble(); 
                       }
                   }
               }
               foundElements.add(m_db.GetCell(xPosition, i).toString());
               
-              //Add to chart dataSet
-              //String[] temp = {m_db.GetCell(xPosition, i).toString(),Integer.toString(sum)};
+              
               cs.add(m_db.GetCell(xPosition, i).GetDouble(),(sum)); 
               
-              
-              System.out.println(title+("j = "+m_db.GetCell(xPosition, i).toString()));    
+             
               preVal = m_db.GetCell(xPosition, i++);
               sum=0;//
               pos++;	
@@ -101,17 +116,18 @@ public class MakeScatterChart {
 	  	   renderer.setShowLegend(false);
 	  	   
 	  	  renderer.setChartTitle(title);
-	  	  renderer.setLabelsTextSize(20);      
+	  	  renderer.setLabelsTextSize(TEXTSIZE);      
 	  
 	 
-	  //parent.addView(mChartView2);
-	  
-	  //return ChartFactory.getPieChartIntent(context, categorySeries, renderer,null);
-	  	  
+	 
 	  XYMultipleSeriesDataset data = new XYMultipleSeriesDataset();
 	  data.addSeries(cs); 
 	  return ChartFactory.getScatterChartView(m_cnt,data,renderer);
 	 }
+	 
+	 private final int TEXTSIZE = 20;
+	 private final int[] MARGINS =  { 20, 30, 15, 0 };
+	 
 	 
 	 private boolean isUnique(String val){
 		 boolean found = false;
@@ -126,14 +142,15 @@ public class MakeScatterChart {
 		 return found;
 	 }
 	 
-	 protected XYMultipleSeriesRenderer buildRenderer(int[] colors, PointStyle[] styles) {
+	 protected XYMultipleSeriesRenderer buildRenderer(int[] colors, 
+			 PointStyle[] styles) {
 		    XYMultipleSeriesRenderer renderer = new XYMultipleSeriesRenderer();
 		    renderer.setAxisTitleTextSize(16);
 		    renderer.setChartTitleTextSize(20);
 		    renderer.setLabelsTextSize(15);
 		    renderer.setLegendTextSize(15);
 		    renderer.setPointSize(5f);
-		    renderer.setMargins(new int[] { 20, 30, 15, 0 });
+		    renderer.setMargins(MARGINS);
 		    int length = colors.length;
 		    for (int i = 0; i < length; i++) {
 		      XYSeriesRenderer r = new XYSeriesRenderer();

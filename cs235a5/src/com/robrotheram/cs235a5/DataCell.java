@@ -13,7 +13,9 @@ public class DataCell {
            //add toast here
        }
     }
-    
+    public DataCell(){
+    	 m_String= "";
+     }
     public boolean SetData(String input){
         if(Pattern.matches(DOUBLEPATTERN, input)){
             m_Double = Double.parseDouble(input);
@@ -26,15 +28,11 @@ public class DataCell {
            m_String = input;
            m_DataType = DataType.INTEGER;
             return true;
-       }else if(Pattern.matches(STRINGPATTERN, input)) {
+       }else {
            m_String = input;
            m_DataType = DataType.STRING;
-            return true;
-       }else{
-    	   System.err.println("fail ajdnaldnasldnasd aksjd aosdn;skda'dlkasdalmdl;ald;smdaskdlkasndpoaskdja fuw ajsjsisdb ");
-           return false;
+           return true;
        }
-        
     }
     
     
@@ -69,7 +67,6 @@ public class DataCell {
     private DataType m_DataType;
     private final String DOUBLEPATTERN = "([0-9]*)\\.([0-9]*)";  
     private final String INTPATTERN = "([0-9]*)";
-    private final String STRINGPATTERN = "/^[a-zA-Z]+$/";
-    
+   
     
 }

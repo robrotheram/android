@@ -45,14 +45,14 @@ public class TableView {
 				        Paint paint = new Paint();
 				        paint.setStyle(Paint.Style.STROKE);
 				        paint.setColor(Color.WHITE);
-				        paint.setStrokeWidth(2);
+				        paint.setStrokeWidth(STROCKWIDTH);
 				        getLocalVisibleRect(rect);
 				        canvas.drawRect(rect, paint);       
 				    }
 	
 				};
 				cell.setText(m_db.GetAColumnName(j));
-				cell.setPadding(6, 4, 6, 4);
+				cell.setPadding(CELLLEFT,CELLTOP,CELLRIGHT,CELLBOTTOM);
 				row.addView(cell);
 				
 				
@@ -71,14 +71,14 @@ public class TableView {
 				        Paint paint = new Paint();
 				        paint.setStyle(Paint.Style.STROKE);
 				        paint.setColor(Color.WHITE);
-				        paint.setStrokeWidth(2);
+				        paint.setStrokeWidth(STROCKWIDTH);
 				        getLocalVisibleRect(rect);
 				        canvas.drawRect(rect, paint);       
 				    }
 	
 				};
 				cell.setText(m_db.GetCell(j,i).toString());
-				cell.setPadding(6, 4, 6, 4);
+				cell.setPadding(CELLLEFT,CELLTOP,CELLRIGHT,CELLBOTTOM);
 				row.addView(cell);
 				
 			}
@@ -92,6 +92,11 @@ public class TableView {
 		
 	}
 
+	private final int CELLLEFT = 6;
+	private final int CELLTOP = 4;
+	private final int CELLRIGHT = 6;
+	private final int CELLBOTTOM = 4;
+	private final int STROCKWIDTH = 2;
 	
 
 }

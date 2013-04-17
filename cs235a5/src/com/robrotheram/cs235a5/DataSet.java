@@ -1,4 +1,6 @@
 package com.robrotheram.cs235a5;
+
+
 /**
  * The MS_DataSet Class stores a structure of the entire data 
  * @author Robert
@@ -17,6 +19,18 @@ public class DataSet {
         m_numCols = width;
         m_numRows = height;
         m_dataSet = new DataCell [height][width];
+        return true;
+    }
+    
+    public boolean SetNullDataSet(int width, int height){
+        m_numCols = width;
+        m_numRows = height;
+        m_dataSet = new DataCell [height][width];
+        for (int i = 0; i < height; i++) {
+				for (int j = 0; j < width; j++) {
+					SetDataCell(new DataCell(),j, i);
+				}
+        }
         return true;
     }
     /**

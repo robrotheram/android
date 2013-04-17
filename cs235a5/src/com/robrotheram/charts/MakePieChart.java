@@ -1,4 +1,4 @@
-package com.robrotheram.cs235a5;
+package com.robrotheram.charts;
 
 import java.util.ArrayList;
 
@@ -8,6 +8,10 @@ import org.achartengine.ChartFactory;
 import org.achartengine.model.CategorySeries;
 import org.achartengine.renderer.DefaultRenderer;
 import org.achartengine.renderer.SimpleSeriesRenderer;
+
+import com.robrotheram.cs235a5.DataCell;
+import com.robrotheram.cs235a5.DataSet;
+import com.robrotheram.cs235a5.DataType;
 
 import android.content.Context;
 
@@ -22,7 +26,14 @@ public class MakePieChart {
 
 	 private DataSet m_db;
 
-	 private int[] m_colors = new int[] { Color.RED, Color.DKGRAY, Color.BLUE, Color.parseColor("#800080"),Color.parseColor("#008000"),Color.GRAY };
+	 private int[] m_colors = new int[] { 
+			 Color.RED, 
+			 Color.DKGRAY,
+			 Color.BLUE, 
+			 Color.parseColor("#800080"),
+			 Color.parseColor("#008000"),
+			 Color.GRAY };
+	 
 	 private Context m_cnt;
 	 private ArrayList<String> foundElements;
 	 private int size;
@@ -49,26 +60,30 @@ public class MakePieChart {
           
           if(!isUnique(m_db.GetCell(xPosition, i).toString())){
               for(j = pos; j < m_db.GetNumOfRows()-1; j++ ){
-                  if(preVal.toString().equals(m_db.GetCell(xPosition, j).toString())){
+                  if(preVal.toString().equals(m_db.GetCell(xPosition, j)
+                		  .toString())){
                       
                       
-                      System.out.println("DatatType= :"+m_db.GetCell(xPosition, j).GetDataType());
+                      System.out.println("DatatType= :"+m_db
+                    		  .GetCell(xPosition, j).GetDataType());
                       //Check if datatype is a number
-                      if(m_db.GetCell(xPosition, j).GetDataType()==DataType.INTEGER){
+                      if(m_db.GetCell(xPosition, j).GetDataType()
+                    		  ==DataType.INTEGER){
                           sum += m_db.GetCell(yPosition, j).GetInteger();  
-                      }else if(m_db.GetCell(xPosition, j).GetDataType()==DataType.DOUBLE){
+                      }else if(m_db.GetCell(xPosition, j).GetDataType()
+                    		  ==DataType.DOUBLE){
                           sum += m_db.GetCell(yPosition, j).GetDouble(); 
                       }
                   }
               }
               foundElements.add(m_db.GetCell(xPosition, i).toString());
               
-              //Add to chart dataSet
-              //String[] temp = {m_db.GetCell(xPosition, i).toString(),Integer.toString(sum)};
+             
               cs.add(m_db.GetCell(xPosition, i).toString(),(sum)); 
               
               
-              System.out.println("Make Chart"+("j = "+m_db.GetCell(xPosition, i).toString()));    
+              System.out.println("Make Chart"+("j = "+m_db
+            		  .GetCell(xPosition, i).toString()));    
               preVal = m_db.GetCell(xPosition, i++);
               sum=0;//
               pos++;	
@@ -89,15 +104,14 @@ public class MakePieChart {
 	  	   renderer.setShowLegend(false);
 	  	   
 	  	  renderer.setChartTitle(title);
-	  	  renderer.setLabelsTextSize(20);      
+	  	  renderer.setLabelsTextSize(TEXTSIZE);      
 	  
 	 
-	  //parent.addView(mChartView2);
 	  
-	  //return ChartFactory.getPieChartIntent(context, categorySeries, renderer,null);
 	  return ChartFactory.getPieChartView(m_cnt, cs,renderer);
 	 }
 	 
+	 private final int TEXTSIZE = 20;
 	 private boolean isUnique(String val){
 		 boolean found = false;
 		 for (int i = 0; i<foundElements.size(); i++){

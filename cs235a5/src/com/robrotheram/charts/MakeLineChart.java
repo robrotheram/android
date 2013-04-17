@@ -1,4 +1,4 @@
-package com.robrotheram.cs235a5;
+package com.robrotheram.charts;
 
 import java.util.ArrayList;
  
@@ -13,6 +13,10 @@ import org.achartengine.model.XYSeries;
 import org.achartengine.renderer.XYMultipleSeriesRenderer;
 import org.achartengine.renderer.XYSeriesRenderer;
 
+import com.robrotheram.cs235a5.DataCell;
+import com.robrotheram.cs235a5.DataSet;
+import com.robrotheram.cs235a5.DataType;
+
 import android.content.Context;
 
 import android.graphics.Color;
@@ -24,7 +28,14 @@ import android.view.View;
 public class MakeLineChart {
 	
 	 private DataSet m_db;
-	 private int[] m_colors = new int[] { Color.RED, Color.DKGRAY, Color.BLUE, Color.parseColor("#800080"),Color.parseColor("#008000"),Color.GRAY };
+	 private int[] m_colors = new int[] {
+			 Color.parseColor("#33b5e5"),
+			 Color.DKGRAY, 
+			 Color.BLUE, 
+			 Color.parseColor("#800080"),
+			 Color.parseColor("#008000"),
+			 Color.GRAY 
+			 };
 	 private Context m_cnt;
 	 private ArrayList<String> foundElements;
 
@@ -52,26 +63,31 @@ public class MakeLineChart {
           
           if(!isUnique(m_db.GetCell(xPosition, i).toString())){
               for(j = pos; j < m_db.GetNumOfRows()-1; j++ ){
-                  if(preVal.toString().equals(m_db.GetCell(xPosition, j).toString())){
+                  if(preVal.toString().equals(m_db.GetCell(xPosition, j)
+                		  .toString())){
                       
                       
-                      System.out.println("DatatType= :"+m_db.GetCell(xPosition, j).GetDataType());
+                      System.out.println("DatatType= :"+m_db
+                    		  .GetCell(xPosition, j).GetDataType());
                       //Check if datatype is a number
-                      if(m_db.GetCell(xPosition, j).GetDataType()==DataType.INTEGER){
+                      if(m_db.GetCell(xPosition, j).GetDataType()
+                    		  ==DataType.INTEGER){
                           sum += m_db.GetCell(yPosition, j).GetInteger();  
-                      }else if(m_db.GetCell(xPosition, j).GetDataType()==DataType.DOUBLE){
+                      }else if(m_db.GetCell(xPosition, j).GetDataType()
+                    		  ==DataType.DOUBLE){
                           sum += m_db.GetCell(yPosition, j).GetDouble(); 
                       }
                   }
               }
               foundElements.add(m_db.GetCell(xPosition, i).toString());
               
-              //Add to chart dataSet
-              //String[] temp = {m_db.GetCell(xPosition, i).toString(),Integer.toString(sum)};
+              
               cs.add(m_db.GetCell(xPosition, i).GetDouble(),(sum)); 
               
               
-              System.out.println("Make Chart"+("j = "+m_db.GetCell(xPosition, i).toString()));    
+              System.out.println("Make Chart"+("j = "+m_db
+            		  .GetCell(xPosition, i).toString()));    
+              
               preVal = m_db.GetCell(xPosition, i++);
               sum=0;//
               pos++;	
@@ -82,7 +98,7 @@ public class MakeLineChart {
 	     int[] colors = new int[1];
 	  	  for(int i=0;i<1;i++)
 	  	  {
-	  	   colors[i]=m_colors[(i%5)];
+	  	   colors[i]=m_colors[(i%(m_colors.length))];
 	  	  }
 	  	   PointStyle[] styles = new PointStyle[] { PointStyle.CIRCLE};
 	  	   XYMultipleSeriesRenderer renderer = buildRenderer(colors, styles);
@@ -96,7 +112,7 @@ public class MakeLineChart {
 	  	   renderer.setShowLegend(false);
 	  	   
 	  	  renderer.setChartTitle(title);
-	  	  renderer.setLabelsTextSize(20);      
+	  	  renderer.setLabelsTextSize(TEXTSIZE);      
 	  
 	 
 	  //parent.addView(mChartView2);
@@ -107,6 +123,7 @@ public class MakeLineChart {
 	  return ChartFactory.getLineChartView(m_cnt,data,renderer);
 	 }
 	 
+	 private final int TEXTSIZE = 20;
 	 private boolean isUnique(String val){
 		 boolean found = false;
 		 for (int i = 0; i<foundElements.size(); i++){

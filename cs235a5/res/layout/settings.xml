@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -21,6 +21,27 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.98"
             android:ems="10"
+            android:imeOptions="actionNext"
+            android:inputType="text"
+            android:lines="1"
+            android:singleLine="true" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@+string/labelPass" />
+
+        <EditText
+            android:id="@+id/editText2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.98"
+            android:ems="10"
+            android:imeOptions="actionDone"
             android:inputType="text"
             android:lines="1"
             android:singleLine="true" >
@@ -35,35 +56,35 @@
             android:text="@+string/Download" />
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal" >
+    <ListView
+        android:id="@+id/ListView1"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1" >
+    </ListView>
 
-        <TextView
-            android:id="@+id/prog"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
-
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <ScrollView
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+    <FrameLayout
+        android:id="@+id/FrameLayout01"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:id="@+id/tableView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/uploads"
+                android:layout_width="232dp"
+                android:layout_height="wrap_content"
+                android:text="@+string/upButton" />
+
+            <Button
+                android:id="@+id/down"
+                android:layout_width="422dp"
+                android:layout_height="wrap_content"
+                android:text="@+string/DownButton" />
         </LinearLayout>
-    </ScrollView>
+    </FrameLayout>
 
 </LinearLayout>
